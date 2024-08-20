@@ -6,7 +6,7 @@ import pyttsx3
 
 app = Flask(__name__)
 model = YOLO("yolov8n.pt")
-cap = cv2.VideoCapture("http://192.168.137.14:81/stream")
+cap = cv2.VideoCapture("http://192.168.137.40:81/stream")
 
 announced_objects = set()
 
