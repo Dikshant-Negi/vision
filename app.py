@@ -6,6 +6,7 @@ import pyttsx3
 
 app = Flask(__name__)
 model = YOLO("yolov8n.pt")
+#cap = cv2.VideoCapture(0)
 cap = cv2.VideoCapture("http://192.168.137.40:81/stream")
 
 announced_objects = set()
@@ -47,6 +48,27 @@ def generate_frames():
             frame = buffer.tobytes()
             yield (b'--frame\r\n'
                    b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+
+# def get_distance():
+#     try:
+#         response = requests.get(esp_ip)
+#         if response.status_code == 200:
+#             distance = response.text
+#             return float(distance)
+#         else:
+#             print("Failed to get data from ESP32")
+#             return None
+#     except requests.exceptions.RequestException as e:
+#         print(f"Error: {e}")
+#         return None
+
+# # Continuously fetch the distance data
+# while True:
+#     distance = get_distance()
+#     if distance is not None:
+#         print(f"Distance: {distance} cm")
+#     time.sleep(1)  # Fetch data every second
+
 
 @app.route('/')
 def index():
